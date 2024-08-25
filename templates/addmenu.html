@@ -1,0 +1,97 @@
+{% extends 'base/base.html' %}
+
+{% block body %}
+
+<div class="container">
+    {% include 'base/header.html' %}
+
+</div>
+<div class="row p-2">
+    <div class="col-md-2">
+        {% include 'base/sidebar.html' %}
+    </div>
+    <div class="col-md-10 p-3">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="main-choose mt-5">
+                    <div class="sub-choose mt-5">
+                        <form action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="text" name="title" placeholder="Food Name" id="" class="input-category" required>
+                            <input type="file" name="image" class="inpdddut me-3" required>
+                            <input type="price" name="price" placeholder="price" class="input-category" required>
+                            <span class="custom-dropdown big">
+                                <select name="category" id="" required>
+                                    <option value="">--select--</option>
+                                    {% for s in category %}
+                                    <option value="{{s.id}}">{{s.title}}</option>
+                                    {% endfor %}
+                                </select>
+                            </span>
+                            <span class="custom-dropdown big">
+                                <select name="tags" id="" required>
+                                    <option value="">--select--</option>
+                                    <option value="Veg">Veg</option>
+                                    <option value="Non Veg">Non Veg</option>
+                                </select>
+                            </span>
+                            <input type="text" name="desc" value="description" class="input-category">
+
+                            <button class="btn-space m-auto" type="submit">
+                                <strong>SUBMIT</strong>
+                                <div id="container-stars">
+                                    <div id="stars"></div>
+                                </div>
+
+                                <div id="glow">
+                                    <div class="circle-space"></div>
+                                    <div class="circle-space"></div>
+                                </div>
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">sl no</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Tags</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">button</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for m in menu %}
+                        <tr>
+                            <th scope="row">{{forloop.counter}}</th>
+                            <td>{{m.category.title}}</td>
+                            <td>{{m.tags}}</td>
+                            <td>{{m.title}}</td>
+                            <td> <img style="width: 200px;" src="{{m.image.url}}" alt="">
+                            </td>
+                            <td>
+                                {{m.price}}
+                            </td>
+                            <td>
+
+                                <a href="{% url 'delmenu' m.id %}">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock body %}

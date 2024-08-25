@@ -1,0 +1,158 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #111;
+}
+
+.square {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+@media(max-width:767px) {
+    .square {
+        width: 0px !important;
+
+    }
+
+}
+
+@media(max-width:1199px) {
+    .square {
+
+        width: 400px;
+        height: 400px;
+    }
+
+    .login {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+.square i {
+    position: absolute;
+    inset: 0;
+    border: 2px solid #fff;
+    transition: 0.5s;
+}
+
+.square i:nth-child(1) {
+    border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+    animation: animate 6s linear infinite;
+}
+
+.square i:nth-child(2) {
+    border-radius: 41% 44% 56% 59% / 38% 62% 63% 37%;
+    animation: animate 4s linear infinite;
+}
+
+.square i:nth-child(3) {
+    border-radius: 41% 44% 56% 59% / 38% 62% 63% 37%;
+    animation: animate2 10s linear infinite;
+}
+
+.square:hover i {
+    border: 6px solid var(--clr);
+    filter: drop-shadow(0 0 20px var(--clr));
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes animate2 {
+    0% {
+        transform: rotate(360deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.login {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.login h2 {
+    font-size: 2em;
+    color: #fff;
+}
+
+.login .inputBx {
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.login .inputBx input {
+    position: relative;
+    width: 100%;
+    padding: 12px 20px;
+    background: #fff;
+    border: 2px solid #fff;
+    border-radius: 40px;
+    font-size: 1.2em;
+    color: #000000;
+    box-shadow: none;
+    outline: none;
+}
+
+.login .inputBx input:hover {
+    background: #03f40f;
+}
+
+.login .inputBx input[type="submit"] {
+    width: 100%;
+    background: #0078ff;
+    background: linear-gradient(45deg, #ff357a, #fff172);
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: 1s;
+}
+
+.login .inputBx input[type="submit"]:focus {
+    background: #03f40f;
+    color: #000000;
+    font-weight: 600;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #03f40f,
+        0 0 15px #03f40f,
+        0 0 25px #03f40f,
+        0 0 5px #03f40f;
+    border-radius: 40px;
+    transform: scale(0.92);
+}
+
+.login .inputBx input::placeholder {
+    color: rgb(0, 0, 0);
+}
+

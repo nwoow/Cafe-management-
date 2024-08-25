@@ -1,0 +1,144 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block body %}
+<style>
+    body {
+        background: url(/static/image/dashboard-banner.jpg) no-repeat;
+        background-size: cover;
+        background-position: center center;
+    }
+    .table-btn {
+        margin: 2px;
+    }
+    .table-block {
+        box-shadow: 0px 2px 2px 2px black;
+        padding: 20px;
+        border-radius: 10px;
+    }
+    .table th, .table td {
+        vertical-align: middle;
+    }
+    .table th {
+        color: #fff;
+    }
+    
+    .tracking-in-expand-fwd {
+        animation: tracking-in-expand-fwd 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+    }
+    @keyframes tracking-in-expand-fwd {
+        0% {
+            letter-spacing: -0.5em;
+            opacity: 0;
+        }
+        40% {
+            opacity: 0.6;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    .form-control, .btn {
+        border-radius: 5px;
+    }
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+    }
+</style>
+<div class="container">
+    {% include 'base/header.html' %}
+
+    <div class="row">
+        <div class="col-md-2">
+            {% include 'base/sidebar.html' %}
+        </div>
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-12 mt-5 mb-5">
+                    <h2 class="tracking-in-expand-fwd text-center fw-bolder fs-1 mt-5 mb-5">Order Details</h2>
+                    <div class="d-flex justify-content-between mb-4">
+                        <div>
+                            <p><i class="fas fa-file-invoice"></i> <b>Invoice No:</b> {{ order.invoice_no }}</p>
+                            <p><i class="fas fa-building"></i> <b>Block:</b> {{ order.block }}</p>
+                            <p><i class="fas fa-door-open"></i> <b>Room No:</b> {{ order.room_no }}</p>
+                        </div>
+                        <div>
+                            <p><i class="fas fa-calendar-alt"></i> <b>Date:</b> {{ order.ordered_date }}</p>
+                            <p><i class="fas fa-info-circle"></i> <b>Status:</b> {{ order.status }}</p>
+                        </div>
+                    </div>
+                </div>
+                <hr class="mb-5">
+                
+                <div class="col-md-7 table_block_order">
+                    <div class="table-block">
+                        <table class="table table-dark table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Sl No</th>
+                                    <th scope="col">Food</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for f in order.booking_food_det.all %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ f.food.title }}</td>
+                                    <td>{{ f.quantity }}</td>
+                                    <td>{{ f.food.price }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <form action="{% url 'changestatus' %}" method="post" class="p-3 bg-dark rounded shadow-sm">
+                        <input type="hidden" name="oid" value="{{ order.id }}">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="mb-3">
+                                    <label for="status" class="form-label text-white"><i class="fas fa-info-circle"></i> Order Status</label>
+                                    <select name="status" id="status" class="form-control">
+                                        <option value="Pending">Pending</option>
+                                        <option value="Accepted">Accepted</option>
+                                        <option value="Delivered">Delivered</option>
+                                        <option value="Canceled">Canceled</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 d-flex align-items-center justify-content-center mt-3">
+                                <button type="submit" class="btn btn-success w-100"><i class="fas fa-check-circle"></i> Update</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

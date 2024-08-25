@@ -1,0 +1,86 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block body %}
+<style>
+    body {
+        background: url(/static/image/dashboard-banner.jpg)no-repeat;
+        background-size: cover;
+        background-position: center center;
+    }
+</style>
+<div class="container">
+    {% include 'base/header.html' %}
+
+
+    <div class="row">
+        <div class="col-md-2">
+            {% include 'base/sidebar.html' %}
+        </div>
+        <div class="col-md-10 ">
+            <div class="row">
+                <div class="col-md-12 mt-5">
+                    <!-- <div style="margin-top: 40px;"> -->
+                    <div class="login-box">
+                        <p>New Order Login</p>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="user-box">
+                                <input required="" name="block" type="text">
+                                <label>BLOCK</label>
+                            </div>
+                            <div class="user-box">
+                                <input required="" name="room_no" type="text">
+                                <label>ROOM No.</label>
+                            </div>
+                            <button class="btnn" type="submit">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                Submit
+                            </button>
+                        </form>
+
+                    </div>
+                </div>
+
+
+                <div class="col-md-12  table_block_order">
+                    <h2 class="tracking-in-expand-fwd text-center fw-bolder fs-1">Details</h2>
+                    <div class="table-block ">
+                        <table class="table table-dark table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">sl no</th>
+                                    <th scope="col">Block</th>
+                                    <th scope="col">Room No</th>
+                                    <th scope="col">button</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for r in rooms %}
+                                <tr>
+                                    <th scope="row">{{forloop.counter}}</th>
+                                    <td>{{r.block}}</td>
+                                    <td>{{r.room_no}}</td>
+                                    <td>
+                                        <button class="table-btn"><a target="_blank" href="{% url 'viewqr' r.id %}"
+                                                type>view</a></button>
+                                        <button class="table-btn"><a href="{% url 'delqr' r.id %}">Delete</a></button>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock body %}

@@ -1,0 +1,59 @@
+{% extends 'base/base.html' %}
+
+{% block body %}
+<style>
+   body {
+      background: url(/static/image/banner.jpg)no-repeat;
+      background-size: cover;
+      background-position: center center;
+      height: 100vh;
+   }
+</style>
+
+<section class="qr-main">
+   <div class="container mt-3 qr-gen">
+      <div class="row">
+         <div class="col-md-12 btn-pdf">
+            <button class="btn-print" id="printPageButton" onClick="window.print();">
+               <span class="icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none"
+                     stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                     <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                     <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                     <rect x="6" y="14" width="12" height="8"></rect>
+                  </svg>
+               </span>
+               <span class="text-print">Print</span>
+            </button>
+         </div>
+      </div>
+      <div class="row text-center m-auto">
+         <div class="col-md-12 mt-4">
+            <img src="/static/image/logo qr/slack.png" alt="">
+            <h2 class="text-white fw-bold">NIKHIL RESORT</h2>
+         </div>
+
+         <h1> Room No. {{room.room_no}}</h1>
+         <div class="col-md-12 qr-code-gen square mt-3 mb-5 boxqr">
+
+            <div class="ribbon"><span>Scan Qr Code</span></div>
+            <img src="{{room.qr_code.url}}" alt="">
+            <i style="--clr:#488ACC"></i>
+         </div>
+      </div>
+
+   </div>
+</section>
+<script>
+   function printpage() {
+      //Get the print button and put it into a variable
+      var printButton = document.getElementById("printpagebutton");
+      //Set the print button visibility to 'hidden' 
+      printButton.style.visibility = 'hidden';
+      //Print the page content
+      window.print()
+      printButton.style.visibility = 'visible';
+   }
+</script>
+
+{% endblock body %}

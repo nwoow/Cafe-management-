@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../static/css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class="container text-center
+    ">
+        <div class="row">
+            <div class="col-md-12 square m-auto">
+
+                <i style="--clr:#FF8400"></i>
+                <i style="--clr:#ffffff"></i>
+                <i style="--clr:#00ff0a"></i>
+                <div class="login">
+                    <h2>Login</h2>
+                    <form action="" method="post" class="d-flex justify-content-md-center align-items-md-center ">
+                        {% csrf_token %}
+                        <div class="inputBx">
+                            <input type="text" name="username" placeholder="username" id="">
+                        </div>
+                        <div class="inputBx">
+                            <input type="password" name="password" placeholder="password">
+                        </div>
+
+                        <div class="inputBx">
+                            <input type="submit" value="Sign in">
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script defer="../static/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

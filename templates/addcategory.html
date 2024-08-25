@@ -1,0 +1,76 @@
+{% extends 'base/base.html' %}
+
+{% block body %}
+
+<div class="container">
+    {% include 'base/header.html' %}
+
+</div>
+<div class="row p-2">
+    <div class="col-md-2">
+        {% include 'base/sidebar.html' %}
+    </div>
+    <div class="col-md-10 p-3 mt-5 ">
+        <div class="main-choose mt-5">
+            <div class="sub-choose mt-5">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <input placeholder="Category Name" type="text" name="title" class="input-category mb-2">
+                    <input type="file" name="image" class="inpdddut me-3" id="arquivo">
+                    <span class="button-borders">
+                        <button class="primary-button" type="submit">Submit
+                        </button>
+                    </span>
+
+                </form>
+            </div>
+        </div>
+        <div>
+
+            <div class="table-categoryy mt-3">
+                <table class="container-cat">
+                    <thead>
+                        <tr>
+                            <th style="width: 100px;">
+                                <h2>Sl no</h2>
+                            </th>
+                            <th>
+                                <h2>Title</h2>
+                            </th>
+                            <th>
+                                <h2>Image</h2>
+                            </th>
+                            <th>
+                                <h2>Button</h2>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for k in category %}
+                        <tr>
+                            <th scope="row">{{forloop.counter}}</th>
+                            <td>{{k.title}}</td>
+                            <td>
+                                <img style="width: 100px;" src="{{k.image.url}}" alt="">
+                            </td>
+                            <td>
+                                <button class="table-btn1">
+                                    <a href="{% url 'delcategory' k.id %}">Delete <i class="fa-solid fa-trash fa-shake"
+                                            style="color: #ffffff;"></i></a>
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock body %}

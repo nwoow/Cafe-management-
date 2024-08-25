@@ -1,0 +1,59 @@
+{% extends 'base/base.html' %}
+
+{% block body %}
+
+<div class="container">
+    {% include 'base/header.html' %}
+</div>
+
+<div class="row p-2">
+    <div class="col-md-2">
+        {% include 'base/sidebar.html' %}
+    </div>
+    <div class="col-md-10 mt-5 p-5">
+        <div class="row text-center">
+            <div class="col-md-3 mb-3">
+                <div class="card p-3 shadow-sm border-0" style="background-color: #ffcccc;">
+                    <div class="card-body">
+                        <h3 class="card-title text-danger">
+                            <i class="fas fa-clock"></i> Pending
+                        </h3>
+                        <p class="card-text text-danger"><b>{{pending_order_det}}</b></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card p-3 shadow-sm border-0" style="background-color: #ccffcc;">
+                    <div class="card-body">
+                        <h3 class="card-title text-success">
+                            <i class="fas fa-check-circle"></i> Accepted
+                        </h3>
+                        <p class="card-text text-success"><b>{{accepted_order_det}}</b></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card p-3 shadow-sm border-0" style="background-color: #cce5ff;">
+                    <div class="card-body">
+                        <h3 class="card-title text-primary">
+                            <i class="fas fa-check"></i> Completed
+                        </h3>
+                        <p class="card-text text-primary"><b>{{completed_order_det}}</b></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card p-3 shadow-sm border-0" style="background-color: #f8d7da;">
+                    <div class="card-body">
+                        <h3 class="card-title text-danger">
+                            <i class="fas fa-times-circle"></i> Cancelled
+                        </h3>
+                        <p class="card-text text-danger">{{canceled_order_det}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

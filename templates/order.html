@@ -1,0 +1,79 @@
+{% extends 'base/base.html' %}
+
+{% block body %}
+<div class="orderItem-one">
+    <div class="container mt-2">
+        <hr>
+        <div class="d-flex justify-content-center">
+            <div class="mx-4">
+                <a href="/menu" class="btn btn-primary cart-nav-btn d-flex align-items-center">
+                    <i class="fa-solid fa-house fa-lg me-2"></i> <!-- Home Icon -->
+                    <h3 class="mb-0 text-white">Home</h3>
+                </a>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+    <div class="container">
+        <h3>Order History</h3>
+        <div class="">
+            {% for o in order %}
+            <div class="row">
+                <div class="col-md-2 col-3">
+                    <img class="img-fluid" src="/static/image/logo.png" alt="">
+                </div>
+                <div class="col-md-6 col-9">
+                    <span>Invoice: {{o.invoice_no}}</span><br>
+                    <span>Date: {{o.ordered_date}}</span><br>
+                    <span>Price: {{o.total_price}}</span><br>
+                    <span>Status: {{o.status}}</span>
+                    <span>
+                        <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop{{o.id}}">
+                            View Menu
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <hr>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+{% for o in order %}
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop{{o.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Ordered Food</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {% for f in o.booking_food_det.all %}
+                <div class="row">
+                    <div class="col-md-2 col-3">
+                        <img class="img-fluid" src="{{f.food.image.url}}" alt="">
+                    </div>
+                    <div class="col-md-8 col-7">
+                        <span>{{f.food.title}}</span>
+                        
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <span>Rs. {{f.food.price}}</span> <b>X</b><span> {{f.quantity}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock body %}

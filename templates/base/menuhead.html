@@ -1,0 +1,41 @@
+<div class="view-menu-head">
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between">
+            <div>
+                <h1>Room No {{room_no}}</h1>
+                <h2>Block {{rblock}}</h2>
+            </div>
+            <div class="position-relative">
+                <a href="{% url 'cart' %}">
+                    <i class="fa-solid fa-cart-plus fa-2x"></i>
+                    <span class="cart-count-badge">{{cart_count}}</span>
+                </a>
+            </div>
+            
+        </div>
+        <hr>
+        <div class="d-flex justify-content-center">
+            <div class="mx-2">
+                <a href="{% url 'viewmenu' %}">
+                    <h3>All</h3>
+                </a>
+            </div>
+            <div class="mx-2">
+                <a href="{% url 'viewmenu' %}?cat=Veg">
+                    <h3>Veg</h3>
+                </a>
+            </div>
+            <div class="mx-2">
+                <a href="{% url 'viewmenu' %}?cat=Non Veg">
+                    <h3>Non Veg</h3>
+                </a>
+            </div>
+            <div class="mx-2">
+                <a href="{% url 'vieworderdet' %}">
+                    <h3>Order</h3>
+                </a>
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+{% extends 'base/base.html' %}
+
+{% block body %}
+<div class="menu-one">
+    {% include 'base/menuhead.html' %}
+    <div class="container">
+        <div class="d-flex">
+            {% for f in category %}
+            <div style="width: 110px;" class="text-center">
+                <a href="{% url 'viewmenuview' %}?block={{rblock}}&roomno={{room_no}}&cat={{f.title}}">
+                    <div>
+                        <img style="width: 100px;" src="{{f.image.url}}" alt="">
+                    </div>
+                    <div class="text-center">
+                        <span>{{f.title}}</span><br>
+                        <span>{{f.category.title}}</span>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock body %}

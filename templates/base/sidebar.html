@@ -1,0 +1,168 @@
+{% load static %}
+
+
+<!-- sidebar -->
+<nav class="sidebar">
+    <div class="menu_content">
+        <ul class="menu_items">
+            <div class="menu_title menu_dahsboard"></div>
+
+            <li class="item">
+                <a href="{% url 'dashboard' %}" class="nav_link submenu_item">
+                    <span class="navlink_icon">
+                        <i class="bx bx-home-alt"></i>
+                    </span>
+                    <span class="navlink">DashBoard</span>
+                </a>
+
+                <!-- <ul class="menu_items submenu">
+                        <a href="{% url 'dashboard' %}" class="nav_link sublink">DashBoard</a>
+                    </ul> -->
+            </li>
+            <!-- end -->
+        </ul>
+
+        <ul class="menu_items">
+            <div class="menu_title menu_editor"></div>
+
+            <li class="item">
+                <a href="{% url 'pending' %}" class="nav_link">
+                    <span class="navlink_icon">
+                        <i class="fa-solid fa-bowl-food"></i>
+                        
+                    </span>
+                    <span class="navlink">Pending Order {{pending_order_det}}</span>
+                </a>
+            </li>
+            <li class="item">
+                <a href="{% url 'accepted' %}" class="nav_link">
+                    <span class="navlink_icon">
+                        
+                        <i class='bx bx-time'></i>
+                    </span>
+                    <span class="navlink">Accepted {{accepted_order_det}}</span>
+                </a>
+            </li>
+            <li class="item">
+                <a href="{% url 'delivered' %}" class="nav_link">
+                    <span class="navlink_icon">
+                        <i class='bx bxs-badge-check'></i>
+                    </span>
+                    <span class="navlink">Completed {{completed_order_det}}</span>
+                </a>
+            </li>
+            <li class="item">
+                <a href="{% url 'canceled' %}" class="nav_link">
+                    <span class="navlink_icon">
+                        <i class='bx bxs-badge-cross'></i>
+                    </span>
+                    <span class="navlink">Cancelled {{canceled_order_det}}</span>
+                </a>
+            </li>
+            <li class="item">
+                <a href="{% url 'generateqr' %}" class="nav_link">
+                    <span class="navlink_icon">
+                        <i class='bx bx-qr-scan'></i>
+                    </span>
+                    <span class="navlink">Generate Qr Code</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="menu_items">
+            <div class="menu_title menu_setting"></div>
+            <li class="item">
+                <a href="{% url 'addcategory' %}" class="nav_link">
+                    <span class="navlink_icon">
+                        <i class='bx bx-category'></i>
+                    </span>
+                    <span class="navlink">Add Category</span>
+                </a>
+            </li>
+            <!-- <li class="item">
+                <a href="" class="nav_link">
+                    <span class="navlink_icon">
+                        <i class='bx bx-list-ul'></i>
+                    </span>
+                    <span class="navlink">Add Sub Category</span>
+                </a>
+            </li> -->
+            <li class="item">
+                <a href="{% url 'addmenu' %}" class="nav_link">
+                    <span class="navlink_icon">
+                        <i class='bx bx-food-menu'></i>
+                    </span>
+                    <span class="navlink">Add Menu</span>
+                </a>
+            </li>
+        </ul>
+
+        <!-- Sidebar Open / Close -->
+        <div class="bottom_content">
+            <div class="bottom expand_sidebar">
+                <span> Expand</span>
+                <i class='bx bx-log-in'></i>
+            </div>
+            <div class="bottom collapse_sidebar">
+                <span> Collapse</span>
+                <i class='bx bx-log-out'></i>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- JavaScript -->
+<script defer="../static/js/bootstrap.bundle.min.js"></script>
+<script>
+    const body = document.querySelector("body");
+    const darkLight = document.querySelector("#darkLight");
+    const sidebar = document.querySelector(".sidebar");
+    const submenuItems = document.querySelectorAll(".submenu_item");
+    const sidebarOpen = document.querySelector("#sidebarOpen");
+    const sidebarClose = document.querySelector(".collapse_sidebar");
+    const sidebarExpand = document.querySelector(".expand_sidebar");
+    sidebarOpen.addEventListener("click", () => sidebar.classList.toggle("close"));
+
+    sidebarClose.addEventListener("click", () => {
+        sidebar.classList.add("close", "hoverable");
+    });
+    sidebarExpand.addEventListener("click", () => {
+        sidebar.classList.remove("close", "hoverable");
+    });
+
+    sidebar.addEventListener("mouseenter", () => {
+        if (sidebar.classList.contains("hoverable")) {
+            sidebar.classList.remove("close");
+        }
+    });
+    sidebar.addEventListener("mouseleave", () => {
+        if (sidebar.classList.contains("hoverable")) {
+            sidebar.classList.add("close");
+        }
+    });
+
+    darkLight.addEventListener("click", () => {
+        body.classList.toggle("dark");
+        if (body.classList.contains("dark")) {
+            document.setI
+            darkLight.classList.replace("bx-sun", "bx-moon");
+        } else {
+            darkLight.classList.replace("bx-moon", "bx-sun");
+        }
+    });
+
+    submenuItems.forEach((item, index) => {
+        item.addEventListener("click", () => {
+            item.classList.toggle("show_submenu");
+            submenuItems.forEach((item2, index2) => {
+                if (index !== index2) {
+                    item2.classList.remove("show_submenu");
+                }
+            });
+        });
+    });
+
+    if (window.innerWidth < 768) {
+        sidebar.classList.add("close");
+    } else {
+        sidebar.classList.remove("close");
+    }
+</script>
